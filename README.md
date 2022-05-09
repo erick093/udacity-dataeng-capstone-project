@@ -1,27 +1,64 @@
 # Capstone Project - Data Engineering Udacity NanoDegree
 
+---
+
 ## Table of Contents
 
-  * [Introduction](#Introduction)
-  * [Data Collection](#Data-Collection)
+---
+
+  * [Project Summary](#Project-Summary)
+  * [Scope](#Scope)
+  * [Data](#Data)
   * [Data Exploration](#Data-Exploration)
   * [Data Modeling](#Data-Modeling)
-  * [Conclusion](#Conclusion)
-  * [Resources](#Resources)
-  * [References](#References)
-  * [Acknowledgements](#Acknowledgements)
-  * [License](#License)
+  * [ETL](#ETL)
+  * [Data Lake](#Data-Lake)
 
-## Introduction
 
-## Data Collection
+## Project Summary
 
+---
+The purpose of the data engineering capstone project is to combine the lessons learned throughout the Udacity
+Data Engineer Nanodegree program. 
+
+The objective of this project is to create an ETL pipeline for the US I94 immigration, 
+Airports information and US demographics datasets to construct an analytical data lake containing 
+immigration events.
+
+## Scope
+
+---
+
+[//]: # (I plan to create a data lake using Pyspark about immigrants destinations in US. )
+
+[//]: # (To achieve this, I've used I94 immigrations dataset along with US demographics dataset. )
+
+[//]: # (Processed data lake tables could be used to analyse immigration trends at US destination cities and origin of the travelers. )
+
+[//]: # (Output is generated in Apache Parquet columnar format for better performance on aggregation queries.)
+## Data
+
+---
+The following datasets were used in this project to construct the data lake:
+
+* `I94 Immigration Data`: This data comes from the US National Tourism and Trade Office. The source of the data is: https://www.trade.gov/national-travel-and-tourism-office
+* `US City Demographic Data`: Data obtained from OpenSoft. This data contains demographic information about US cities.
+* `Airports Data`: This data comes from the OurAirports and provides airport information for different geographical regions. The source of the data is: https://datahub.io/core/airport-codes#data
 ## Data Exploration
+
+---
+
+All the information related to the Data Exploration process is provided in the self-contained python notebook file:
+
+    'data_exploration.ipynb'
+
 
 ## Data Modeling
 
+---
+
 The data model consist of the following tables:
-* `calendar_dim`: Calendar dimension table, contains information about the calendar.
+* `calendar_dim`: Calendar dimension table, contains information about the calendar. 
 * `demographic_dim`: Demographic dimension table, contains information about the demographic data of all the US states.
 * `visa_dim`: Visa category dimension table, contains information about the different visa categories.
 * `country_dim`: Country dimension table, contains information about the different countries.
@@ -31,3 +68,39 @@ The data model consist of the following tables:
 
 The following image depicts the data model:
 ![Data Model](images/er_diagram.png)
+
+## ETL
+The ETL process consist of the following steps:
+
+1. Load the data from the source.
+* Load the I94 immigration data.
+* Load the I94 immigration data labels.
+* Load the airport codes data.
+* load the US cities demographics.
+2. Transform the data.
+* Clean and transform the immigration data into the immigration fact table.
+* Clean and transform the immigration data labels into the calendar, ports, country, visa and US states dimensional tables.
+* Clean and transform the US cities demographics data into the demographics dimensional table.
+* Clean and transform the airport codes data into the airports dimensional table.
+4. Load the data into the data lake.
+5. Perform data quality checks.
+6. Perform data analysis.
+## Data Lake
+
+The tools used to construct the data lake are:
+
+    * PySpark 
+    * Python
+
+The architecture of the data lake is described in the following figure:
+
+![Data Lake](images/architecture_aws.png)
+
+The architecture of the data lake describes the production process where the data is captured using AWS Firehose, and the 
+capture data is stored in the data lake. Using AWS EMR and spark the data lake is transformed into the corresponding tables of the 
+star schema. The resulting tables are created in parquet format and stored in the data lake.
+
+
+
+
+
