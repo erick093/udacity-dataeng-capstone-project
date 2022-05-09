@@ -28,7 +28,7 @@ def clean_dataframe(df, columns_to_drop):
     :return: The cleaned dataframe
     """
     # Drop the columns
-    df = df.drop(columns_to_drop)
+    df = df.drop(columns_to_drop, axis=1)
 
     # Drop the rows where all the values are missing
     df = df.dropna(how='all')
