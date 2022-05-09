@@ -13,6 +13,7 @@
   * [Data Modeling](#Data-Modeling)
   * [ETL](#ETL)
   * [Data Lake](#Data-Lake)
+  * [Scenarios](#Scenarios)
 
 
 ## Project Summary
@@ -99,6 +100,12 @@ The architecture of the data lake is described in the following figure:
 The architecture of the data lake describes the production process where the data is captured using AWS Firehose, and the 
 capture data is stored in the data lake. Using AWS EMR and spark the data lake is transformed into the corresponding tables of the 
 star schema. The resulting tables are created in parquet format and stored in the data lake.
+
+## Scenarios
+
+* [Scenario 1](#Scenario-1): **The data was increased by 100x.** The star schema architecture remains the same in this scenario. Optimizations at RDD level becomes important when the data grows significantly, I'll use broadcasting to distribute the dimensional tables which are considerable smaller than the fact table, so join operations if needed are much faster.
+* [Scenario 2](#Scenario-2): **The pipelines were run on a daily basis by 7am.** In order to have complete control of the pipeline, Apache Airflow will be needed, and the configuration for the required schedule has to be done.
+* [Scenario 3](#Scenario-3): **The database needs to be accessed by 100+ people.** To comply with Data Governance and Data Privacy, the data lake need to mask certain data fields. Also, the data lake will require specific access permissions, to prevent unauthorized access.
 
 
 
