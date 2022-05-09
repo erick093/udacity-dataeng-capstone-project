@@ -29,14 +29,8 @@ immigration events.
 ## Scope
 
 ---
-
-[//]: # (I plan to create a data lake using Pyspark about immigrants destinations in US. )
-
-[//]: # (To achieve this, I've used I94 immigrations dataset along with US demographics dataset. )
-
-[//]: # (Processed data lake tables could be used to analyse immigration trends at US destination cities and origin of the travelers. )
-
-[//]: # (Output is generated in Apache Parquet columnar format for better performance on aggregation queries.)
+This project implements an analytics data lake used ofr the US immigration department to detect immigration pattern,using data
+such as airport information and demographics data.
 ## Data
 
 ---
