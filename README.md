@@ -64,6 +64,66 @@ The data model consist of the following tables:
 The following image depicts the data model:
 ![Data Model](images/er_diagram.png)
 
+### Data Dictionary
+#### demographic data:
+
+* `city`: city name
+* `state`: state name
+* `median_age`: median age of the population
+* `male_population`: male population
+* `female_population`: female population
+* `total_population`: total population
+* `number_veterans`: number of veterans in the city's state
+* `foreign_born`: number of foreign born citizens
+* `average_household_size`: average members in a family
+* `state_code`: state code
+* `race`: racial data
+* `count`: count information
+
+#### airports data:
+
+* `ident`: identifier
+* `type`: type of airport
+* `name`: airport's name
+* `elevation_ft`: elevation in feets
+* `iso_country`: country
+* `municipality`: municipality
+* `gps_code`: gps code
+* `iata_code`: IATA code
+* `local_code`: local code
+* `coordinates`: latitude and longitude coordinates
+
+
+#### immigration data:
+
+* `record_Id`: record ID
+* `entry_year`: year of entry
+* `entry_mont`: month of entry
+* `country_citizenship`: country citizenship
+* `country_residence`: country of residence
+* `port_of_entry`: port of entry
+* `visa_type`: visa type
+* `arrival_date`: arrival date
+* `departure_date`: departure date
+* `mode_of_entry`: mode of entry, can be 1 = 'Air'
+    2 = 'Sea'
+    3 = 'Land'
+    9 = 'Not reported'
+* `state_code`: US state code
+* `count`: count information
+* `age`: age of the person at the time of entry
+* `arrival_flag`: arrival flag.  Admitted or paroled into the U.S.
+* `departure_flag`: departure flag.  Departed the U.S,lost I-94 or is deceased.
+* `match_flag`: match flag.  Matched to a record in the I94_Visa_Records table.
+* `birth_year`: birth year
+* `gender`: gender of the person
+* `airline`: airline of arrival
+* `admission_number`: identifier of arrival
+* `flight_number`: flight number
+* `visa_type`: type of visa
+
+
+
 ## ETL
 The ETL process consist of the following steps:
 
