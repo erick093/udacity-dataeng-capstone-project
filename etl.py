@@ -119,9 +119,15 @@ def perform_quality_checks(spark, output_data):
     :param spark: Spark session
     :param output_data: Output data directory
     """
-    # define the dataframes to check
-    dataframes_to_check = ["calendar_dim", "country_dim", "demographics_dim", "immigration_fact", "ports_dim",
-                           "us_airports_dim", "us_states_dim", "visa_dim"]
+    # define the dataframes to check for quality, dictionary with keys as the tables and the values as primary keys
+    dataframes_to_check = {'calendar_dim': 'calendar_id',
+                           'demographics_dim': 'record_id',
+                           'country_dim': 'country_id',
+                           'ports_dim': 'port_id',
+                           'us_airports_dim': 'ident',
+                           'visa_dim': 'visa_category_id',
+                           'immigration_fact': 'record_id',
+                           'us_states_dim': 'us_state_id'}
 
     # read the parquet dataframe and check
     for df_name in dataframes_to_check:
@@ -131,6 +137,14 @@ def perform_quality_checks(spark, output_data):
             raise ValueError(f"quality-check-count not passed!: {df_name} is empty")
         else:
             log_info(f"quality-check-count passed!: {df_name} has {df_count} rows")
+
+        idx_duplicates = df.groupby(dataframes_to_check[df_name]).count().where("count > 1").collect()
+
+        if idx_duplicates:
+            raise ValueError(f"quality-check-duplicates not passed!: {df_name} has duplicates")
+        else:
+            log_info(f"quality-check-duplicates passed!: {df_name} has no duplicates")
+
         # delete the dataframe from memory
         df.unpersist()
 

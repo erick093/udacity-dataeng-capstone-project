@@ -249,6 +249,9 @@ def create_demographics_dim_table(spark, demographics_df, output_data):
         log_info(f"Casting {column} to integer")
         demographics_df = demographics_df.withColumn(column, demographics_df[column].cast(IntegerType()))
 
+    # Create an id column
+    demographics_df = demographics_df.withColumn('record_id', monotonically_increasing_id())
+
     # write the demographics dim table to parquet
     demographics_df.write.parquet(output_data + "demographics_dim.parquet", mode="overwrite")
 
