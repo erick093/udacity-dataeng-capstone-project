@@ -140,7 +140,7 @@ The ETL process consist of the following steps:
 4. Load the data into the data lake.
 5. Perform data quality checks.
 6. Perform data analysis.
-## Data Lake
+## Write Up
 
 The tools used to construct the data lake are:
 
@@ -154,6 +154,19 @@ The architecture of the data lake is described in the following figure:
 The architecture of the data lake describes the production process where the data is captured using AWS Firehose, and the 
 capture data is stored in the data lake. Using AWS EMR and spark the data lake is transformed into the corresponding tables of the 
 star schema. The resulting tables are created in parquet format and stored in the data lake.
+
+### Choice of tools
+
+The choice of the data lake is based on the following criteria:
+
+* The data lake is designed to be a data warehouse. Spark allows to efficiently perform data analysis and data mining. Since the data lake is a data warehouse, it is designed to be highly scalable and efficient.
+* The Star-Schema is a data lake schema that is designed to be highly scalable and efficient. We use the Star-Schema to since it allow us to define a fact table to store the different facts of the data lake, and aggregate the facts into the different dimensions. The immigration fact table is the center of the data model and contains keys who link to the dimension tables.
+
+### How often should the data be updated
+For our analysis case, we used the I94 Immigration data for the month of April of the year 2016.  The main goal of the data lake is to present monthly analytics insight to the Immigration team.
+The data lake should be updated monthly, since a monthly update will deliver the necessary insights for the stakeholders to make the necessary decisions.
+
+
 
 ## Scenarios
 
